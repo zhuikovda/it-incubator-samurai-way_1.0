@@ -1,0 +1,22 @@
+.nav {
+    grid-area: n;
+    background-color: rgb(4, 248, 77);
+    padding: 20px;
+
+}
+
+.item {
+    list-style-type: none;
+    font-size: larger;
+}
+
+.item a {
+    color: white;
+    text-decoration: none;
+
+}
+
+/**/
+.item .active {
+    color: yellow;
+}

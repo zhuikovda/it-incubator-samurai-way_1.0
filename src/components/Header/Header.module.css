@@ -1,0 +1,10 @@
+.header {
+    grid-area: h;
+    background-color: green;
+}
+
+.header__logo {
+    width: 35px;
+    height: 35px;
+    margin: 10px 0 0 20px;
+}
