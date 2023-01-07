@@ -3,6 +3,7 @@
     /* grid-template-areas: "a a a" "b b c" "b b c"; */
     grid-template-columns: 2fr 10fr;
     /* justify-content: start; */
+    
 }
 
 .dialogsItem {
@@ -18,11 +19,44 @@
     text-decoration: none;
 }
 
-.messages {
-    padding: 10px;
-
+.dialog img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
 }
 
-.messages .message {}
+.messages {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 500px;
+    padding: 10px;
+    /* text-align: start; */
+}
 
-.message {}
+.messages_left {
+    display: flex;
+    flex-direction: row;
+    text-align: start;
+    width: 200px;
+    background-color: aquamarine;
+}
+
+.messages_right {
+    margin-left: 300px;
+    display: flex;
+    flex-direction: row-reverse;
+    text-align: end;
+    /* width: 200px; */
+    background-color: rgb(229, 245, 91);
+}
+
+.messages img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    padding: 0px 10px 0px 10px;
+}
+
+.message {
+}

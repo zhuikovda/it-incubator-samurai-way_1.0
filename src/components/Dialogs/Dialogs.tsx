@@ -1,53 +1,27 @@
-import React from "react"
-import {NavLink} from "react-router-dom"
-import s from "./Dialogs.module.css"
+import React from "react";
+import { NavLink } from "react-router-dom";
+import s from "./Dialogs.module.css";
+import { DialogItem } from "./Dialog/DialogItem";
+import { MessageItem } from "./Messages/MessageItem";
 
-type dialogPropsType = {
-    name: string
-    id: string
-}
+const Dialogs = (props: any) => {
+    const dialogElement = props.stateDialogs.dialogData.map((dialog: any) => (
+        <DialogItem name={dialog.name} id={dialog.id} ava={dialog.ava} />
+    ));
+   
 
-type messagePropsType = {
-    message: string
-}
+    const messageElement = props.stateDialogs.messageData.map((message: any) => (
+        <MessageItem message={message.message} position = {message.leftEdge} ava ={message.ava}/>
+    ));
 
-const DialogItem = (props: dialogPropsType) => {
-    let path = "/dialogs/" + props.id
-    return (
-        <div className={s.dialog}>
-            <NavLink to={path} activeClassName={s.active}>
-                {props.name}
-            </NavLink>
-        </div>
-    )
-}
-
-const MessageItem = (props: messagePropsType) => {
-    return <div className={s.message}>{props.message}</div>
-}
-
-const Dialogs = () => {
     return (
         <div className={s.dialogs}>
             {/* <h1>Dialogs</h1>                 */}
-            <div className={s.dialogsItem}>
-                <DialogItem name={"Dima"} id="1" />
-                <DialogItem name={"Sveta"} id="2" />
-                <DialogItem name={"Eva"} id="3" />
-                <DialogItem name={"Sasha"} id="4" />
-                <DialogItem name={"Eva"} id="5" />
-                <DialogItem name={"Zina"} id="6" />
-            </div>
-            <div className={s.messages}>
-                <MessageItem message="Hi!" />
-                <MessageItem message="How are you?" />
-                <MessageItem message="Hello!" />
-                <MessageItem message="I'am fine!" />
-                <MessageItem message="Good bye!" />
-            </div>
+            <div className={s.dialogsItem}>{dialogElement}</div>
+            <div className={s.messages}>{messageElement}</div>
         </div>
-    )
-}
+    );
+};
 
 // const Message = (props: messagePropsType) => {
 //     return (
@@ -57,4 +31,4 @@ const Dialogs = () => {
 //     )
 // }
 
-export default Dialogs
+export default Dialogs;

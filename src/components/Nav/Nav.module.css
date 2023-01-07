@@ -2,7 +2,6 @@
     grid-area: n;
     background-color: rgb(4, 248, 77);
     padding: 20px;
-
 }
 
 .item {
@@ -13,10 +12,35 @@
 .item a {
     color: white;
     text-decoration: none;
-
 }
 
 /**/
 .item .active {
     color: yellow;
+}
+
+.sidebar_title {
+    margin: 40px 0 0 40px;
+    font-size: 24px;
+    color: white;
+}
+
+.wrapper__sidebar_friends {
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar_friends {
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+    text-align: center;
+    color: aliceblue;
+}
+
+.sidebar_friends img {
+    padding: 0 10px 0 10px;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
 }
