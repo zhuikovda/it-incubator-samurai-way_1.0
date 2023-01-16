@@ -9,6 +9,7 @@ export type StatePropsType = {
 export type DialogsPagePropsType = {
     dialogData: DialogDataPropsType[];
     messageData: MessageDataPropsType[];
+    newMessageText: string;
 };
 
 export type DialogDataPropsType = {
@@ -24,8 +25,9 @@ export type MessageDataPropsType = {
     ava: string;
 };
 
-type ProfilePagePropsType = {
+export type ProfilePagePropsType = {
     postData: PostDataPropsType[];
+    newPostText: string;
 };
 
 type PostDataPropsType = {
@@ -34,7 +36,7 @@ type PostDataPropsType = {
     likesCount: number;
 };
 
- export type SidebarFriendsPropsType = {
+export type SidebarFriendsPropsType = {
     title: string;
     friends: FriendsPropsType[];
 };
@@ -116,13 +118,15 @@ export const state: StatePropsType = {
                 leftEdge: false,
                 ava: "https://cs10.pikabu.ru/post_img/big/2018/02/23/11/1519415820143773252.jpg"
             }
-        ]
+        ],
+        newMessageText: "Hi, dima!"
     },
     profilePage: {
         postData: [
             { id: 1, message: "Hi, Dima!", likesCount: 15 },
             { id: 2, message: "Hi, Eva!", likesCount: 20 }
-        ]
+        ],
+        newPostText: "Hi, dima!"
     },
     sidebarFriends: {
         title: "Friends",
@@ -146,12 +150,35 @@ export const state: StatePropsType = {
     }
 };
 
-export let addPost = (postMessage: string) => {
+export let addPost = () => {
     const newPost: PostDataPropsType = {
         id: 3,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 18
     };
     state.profilePage.postData.push(newPost);
+    state.profilePage.newPostText = "";
+    renderEntireTree(state);
+};
+
+export let updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText;
+    renderEntireTree(state);
+};
+
+export let addMessage = () => {
+    const newMessage: MessageDataPropsType = {
+        id: 7,
+        message: state.dialogsPage.newMessageText,
+        leftEdge: true,
+        ava: ""
+    };
+    state.dialogsPage.messageData.push(newMessage);
+    state.dialogsPage.newMessageText = "";
+    renderEntireTree(state);
+};
+
+export let updateNewMassageText = (newMessage: string) => {
+    state.dialogsPage.newMessageText = newMessage;
     renderEntireTree(state);
 };

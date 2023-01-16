@@ -6,6 +6,8 @@ import { DialogsPagePropsType } from "../../redux/state";
 
 type DialogsPropsType = {
     stateDialogs: DialogsPagePropsType;
+    addMessage: () => void;
+    updateNewMassageText: (newMessage: string) => void;
 };
 
 const Dialogs: FC<DialogsPropsType> = (props) => {
@@ -20,8 +22,15 @@ const Dialogs: FC<DialogsPropsType> = (props) => {
     const newMessageElement = React.createRef<HTMLTextAreaElement>();
 
     const addMessageHandler = () => {
-        let text = newMessageElement.current?.value;
-        alert(text);
+        // let text = newMessageElement.current?.value;
+        props.addMessage();
+    };
+
+    const onChangeTextHandler = () => {
+        if (newMessageElement.current) {
+            let text = newMessageElement.current.value;
+            props.updateNewMassageText(text);
+        }
     };
 
     return (
@@ -31,7 +40,11 @@ const Dialogs: FC<DialogsPropsType> = (props) => {
                 {messageElement}
                 <div className={s.textarea}>
                     <div>
-                        <textarea ref={newMessageElement}></textarea>
+                        <textarea
+                            onChange={onChangeTextHandler}
+                            ref={newMessageElement}
+                            value={props.stateDialogs.newMessageText}
+                        ></textarea>
                     </div>
                     <div>
                         <button onClick={addMessageHandler}>Add post</button>

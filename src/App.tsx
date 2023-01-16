@@ -9,10 +9,13 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
-import { StatePropsType } from "./redux/state";
+import { StatePropsType, addMessage, updateNewMassageText } from "./redux/state";
 
 type AddPropsType = {
-    addPost: (postMessage: string) => void;
+    addPost: () => void;
+    updateNewPostText: (newText: string) => void;
+    addMessage: () => void;
+    updateNewMassageText: (newMessage: string) => void;
     state: StatePropsType;
 };
 
@@ -25,12 +28,22 @@ const App: React.FC<AddPropsType> = (props) => {
                 <Route
                     path="/profile"
                     render={() => (
-                        <Profile stateProfile={props.state.profilePage} addPost={props.addPost} />
+                        <Profile
+                            stateProfile={props.state.profilePage}
+                            addPost={props.addPost}
+                            updateNewPostText={props.updateNewPostText}
+                        />
                     )}
                 />
                 <Route
                     path="/dialogs"
-                    render={() => <Dialogs stateDialogs={props.state.dialogsPage} />}
+                    render={() => (
+                        <Dialogs
+                            stateDialogs={props.state.dialogsPage}
+                            addMessage={addMessage}
+                            updateNewMassageText={updateNewMassageText}
+                        />
+                    )}
                 />
                 <Route path="/news" render={() => <News />} />
                 <Route path="/music" render={() => <Music />} />

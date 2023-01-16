@@ -2,7 +2,13 @@ import React, { FC } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { StatePropsType, addPost} from "./redux/state";
+import {
+    StatePropsType,
+    addMessage,
+    addPost,
+    updateNewMassageText,
+    updateNewPostText
+} from "./redux/state";
 import { BrowserRouter } from "react-router-dom";
 
 // type RenderEntireTreePropsType = {
@@ -10,12 +16,16 @@ import { BrowserRouter } from "react-router-dom";
 //     state: StatePropsType
 // }
 
-
-
 export const renderEntireTree = (state: StatePropsType) => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={state} addPost={addPost} />
+            <App
+                state={state}
+                addPost={addPost}
+                updateNewPostText={updateNewPostText}
+                addMessage={addMessage}
+                updateNewMassageText={updateNewMassageText}
+            />
         </BrowserRouter>,
         document.getElementById("root")
     );

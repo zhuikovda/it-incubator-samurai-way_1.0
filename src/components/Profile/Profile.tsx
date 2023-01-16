@@ -2,6 +2,7 @@ import React from "react";
 // import cl from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import { ProfilePagePropsType } from "../../redux/state";
 
 // import Post from "./My posts/Posts/Post";
 // import MyPosts from "./My posts/MyPosts";
@@ -13,12 +14,13 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 type ProfilePropsType ={
     stateProfile: ProfilePagePropsType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void;
 }
 
-type ProfilePagePropsType = {
-    postData: PostDataPropsType[];
-};
+// type ProfilePagePropsType = {
+//     postData: PostDataPropsType[];
+// };
 
 type PostDataPropsType = {
     id: number;
@@ -31,7 +33,7 @@ const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPosts postData={props.stateProfile.postData} addPost={props.addPost} />
+            <MyPosts stateProfile={props.stateProfile} addPost={props.addPost} updateNewPostText={props.updateNewPostText}/>
         </div>
     );
 };
