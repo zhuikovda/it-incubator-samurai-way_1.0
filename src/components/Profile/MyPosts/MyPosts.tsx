@@ -1,35 +1,45 @@
-import React from "react";
+import React, { KeyboardEvent } from "react";
 import cl from "./MyPosts.module.css";
 import Post from "./Posts/Post";
 
-
-type PostsPropsType = {
-    postData: Array<PostDataPropsType>
-}
+type MyPostsPropsType = {
+    postData: PostDataPropsType[];
+    addPost: (postMessage: string) => void;
+};
 
 type PostDataPropsType = {
-    id: number
-    message: string
-    likesCount: number
-}
+    id: number;
+    message: string;
+    likesCount: number;
+};
 
-const MyPosts = (props: PostsPropsType) => {
-//     let postData = [
-//         { id: 1, message: "Hi, Dima!", likesCount: 15 },
-//         { id: 1, message: "Hi, Eva!", likesCount: 20 }
-//     ];
+const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+    const postElement = props.postData.map((post: any) => (
+        <Post message={post.message} likesCount={post.likesCount} />
+    ));
 
+    const newPostElement = React.createRef<HTMLTextAreaElement>();
 
-
-    const postElement = props.postData.map(post => <Post message={post.message} likesCount={post.likesCount}  />)
+    const addPostHandler = () => {
+        if (newPostElement.current) {
+            let text = newPostElement.current.value;
+            props.addPost(text);
+            newPostElement.current.value = ""          
+        }
+    };
 
     return (
         <div className={cl.wrapper}>
-            <div>My posts</div>
-            <div>New posts</div>
-            <div className={cl.posts}>
-                {postElement}
+            <h3>My posts</h3>
+            <div>
+                <div>
+                    <textarea ref={newPostElement} value={"__d_zh__"} />
+                </div>
+                <div>
+                    <button onClick={addPostHandler}>Add post</button>
+                </div>
             </div>
+            <div className={cl.posts}>{postElement}</div>
         </div>
     );
 };

@@ -1,54 +1,22 @@
-/* eslint-disable react/jsx-no-undef */
-// import logo from './logo.svg';
 import React from "react";
 import "./App.css";
 import Nav from "./components/Nav/Nav";
 import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import Dialogs from "./components/Dialogs/Dialogs";
-import { BrowserRouter, Route } from "react-router-dom";
+import { Route } from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import { SidebarFriends } from "./components/SidebarFriends/SidebarFriends";
 
-// type StatePropsType ={
-//     state: SocialNetworkPropsType
-// }
+import { StatePropsType } from "./redux/state";
 
-// type SocialNetworkPropsType = {
-//     dialogsPage: DialogPagePropsType;
-//     profilePage: ProfilePagePropsType;
-// };
+type AddPropsType = {
+    addPost: (postMessage: string) => void;
+    state: StatePropsType;
+};
 
-// type DialogPagePropsType = {
-//     dialogData: Array<DialogDataPropsType>;
-//     messageData: Array<MessageDataPropsType>;
-// };
-
-// type ProfilePagePropsType = {
-//     dialogData: Array<DialogDataPropsType>;
-//     messageData: Array<MessageDataPropsType>;
-//     postData: Array<PostDataPropsType>;
-// };
-
-// type DialogDataPropsType = {
-//     id: number;
-//     name: string;
-// };
-
-// type MessageDataPropsType = {
-//     id: number;
-//     message: string;
-// };
-
-// type PostDataPropsType = {
-//     id: number;
-//     message: string;
-//     likesCount: number;
-// };
-
-const App = (props: any) => {
+const App: React.FC<AddPropsType> = (props) => {
     return (
         <div className="app_wrapper">
             <Header />
@@ -56,7 +24,9 @@ const App = (props: any) => {
             <div className="app__wrapper_content">
                 <Route
                     path="/profile"
-                    render={() => <Profile stateProfile={props.state.profilePage} />}
+                    render={() => (
+                        <Profile stateProfile={props.state.profilePage} addPost={props.addPost} />
+                    )}
                 />
                 <Route
                     path="/dialogs"
@@ -66,12 +36,6 @@ const App = (props: any) => {
                 <Route path="/music" render={() => <Music />} />
                 <Route path="/settings" render={() => <Settings />} />
             </div>
-            {/* <Route
-                    path="/sidebarFriends"
-                    render={() => (
-                        <SidebarFriends stateSidebarFriends={props.state.sidebarFriends} />
-                    )}
-                /> */}
         </div>
     );
 };

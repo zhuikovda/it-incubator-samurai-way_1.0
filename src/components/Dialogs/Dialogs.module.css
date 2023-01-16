@@ -1,6 +1,6 @@
 .dialogs {
     display: grid;
-    /* grid-template-areas: "a a a" "b b c" "b b c"; */
+    grid-template-areas: "a b b" "a b b"  ;
     grid-template-columns: 2fr 10fr;
     /* justify-content: start; */
     
@@ -59,4 +59,8 @@
 }
 
 .message {
+}
+
+.textarea {
+    margin: 30px 0 0 0;
 }

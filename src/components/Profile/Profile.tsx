@@ -11,21 +11,27 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 //     { id: 1, message: "Hi, Eva!", likesCount: 20 }
 // ];
 
-// type SocialNetworkPropsType = {
-//     postData: Array<PostDataPropsType>;
-// };
+type ProfilePropsType ={
+    stateProfile: ProfilePagePropsType
+    addPost: (postMessage: string) => void
+}
 
-// type PostDataPropsType = {
-//     id: number;
-//     message: string;
-//     likesCount: number;
-// };
+type ProfilePagePropsType = {
+    postData: PostDataPropsType[];
+};
 
-const Profile = (props: any) => {
+type PostDataPropsType = {
+    id: number;
+    message: string;
+    likesCount: number;
+};
+
+
+const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPosts postData={props.stateProfile.postData} />
+            <MyPosts postData={props.stateProfile.postData} addPost={props.addPost} />
         </div>
     );
 };

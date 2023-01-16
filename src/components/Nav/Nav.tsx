@@ -1,9 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import cl from "./Nav.module.css";
-import { SidebarFriends } from "../SidebarFriends/SidebarFriends";
+import { SidebarFriendsPropsType } from "../../redux/state";
 
-const Nav = (props: any) => {
+type NavPropsType = {
+    stateSidebarFriends: SidebarFriendsPropsType;
+};
+
+const Nav: React.FC<NavPropsType> = (props) => {
     const sidebarFriendsElement = props.stateSidebarFriends.friends.map((t: any) => (
         <span className={cl.sidebar_friends}>
             <img src={t.ava} alt="" />
@@ -41,7 +45,7 @@ const Nav = (props: any) => {
                     </li>
                 </ul>
                 <div className={cl.sidebar_title}>{props.stateSidebarFriends.title}</div>
-                <div className={cl.wrapper__sidebar_friends} >{sidebarFriendsElement}</div>
+                <div className={cl.wrapper__sidebar_friends}>{sidebarFriendsElement}</div>
             </nav>
         </div>
     );
