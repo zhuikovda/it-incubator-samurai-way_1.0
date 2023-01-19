@@ -9,29 +9,31 @@ import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
-import { StatePropsType, addMessage, updateNewMassageText } from "./redux/state";
+import { StatePropsType, StoreType, store } from "./redux/state";
 
 type AddPropsType = {
-    addPost: () => void;
-    updateNewPostText: (newText: string) => void;
-    addMessage: () => void;
-    updateNewMassageText: (newMessage: string) => void;
-    state: StatePropsType;
+    // addPost: () => void;
+    // updateNewPostText: (newText: string) => void;
+    // addMessage: () => void;
+    // updateNewMassageText: (newMessage: string) => void;
+    // state: StatePropsType;
+    store: StoreType;
 };
 
 const App: React.FC<AddPropsType> = (props) => {
+    let state = props.store.getState();
     return (
         <div className="app_wrapper">
             <Header />
-            <Nav stateSidebarFriends={props.state.sidebarFriends} />
+            <Nav stateSidebarFriends={state.sidebarFriends} />
             <div className="app__wrapper_content">
                 <Route
                     path="/profile"
                     render={() => (
                         <Profile
-                            stateProfile={props.state.profilePage}
-                            addPost={props.addPost}
-                            updateNewPostText={props.updateNewPostText}
+                            stateProfile={state.profilePage}
+                            addPost={props.store.addPost.bind(store)}
+                            updateNewPostText={props.store.updateNewPostText.bind(store)}
                         />
                     )}
                 />
@@ -39,9 +41,9 @@ const App: React.FC<AddPropsType> = (props) => {
                     path="/dialogs"
                     render={() => (
                         <Dialogs
-                            stateDialogs={props.state.dialogsPage}
-                            addMessage={addMessage}
-                            updateNewMassageText={updateNewMassageText}
+                            stateDialogs={state.dialogsPage}
+                            addMessage={props.store.addMessage.bind(store)}
+                            updateNewMassageText={props.store.updateNewMassageText.bind(store)}
                         />
                     )}
                 />

@@ -22,11 +22,11 @@ type ProfilePropsType ={
 //     postData: PostDataPropsType[];
 // };
 
-type PostDataPropsType = {
-    id: number;
-    message: string;
-    likesCount: number;
-};
+// type PostDataPropsType = {
+//     id: number;
+//     message: string;
+//     likesCount: number;
+// };
 
 
 const Profile: React.FC<ProfilePropsType> = (props) => {
