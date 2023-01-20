@@ -8,15 +8,9 @@ import { Route } from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-
 import { StatePropsType, StoreType, store } from "./redux/state";
 
 type AddPropsType = {
-    // addPost: () => void;
-    // updateNewPostText: (newText: string) => void;
-    // addMessage: () => void;
-    // updateNewMassageText: (newMessage: string) => void;
-    // state: StatePropsType;
     store: StoreType;
 };
 
@@ -32,8 +26,7 @@ const App: React.FC<AddPropsType> = (props) => {
                     render={() => (
                         <Profile
                             stateProfile={state.profilePage}
-                            addPost={props.store.addPost.bind(store)}
-                            updateNewPostText={props.store.updateNewPostText.bind(store)}
+                            dispatch={props.store.dispatch.bind(props.store)}
                         />
                     )}
                 />
@@ -42,8 +35,7 @@ const App: React.FC<AddPropsType> = (props) => {
                     render={() => (
                         <Dialogs
                             stateDialogs={state.dialogsPage}
-                            addMessage={props.store.addMessage.bind(store)}
-                            updateNewMassageText={props.store.updateNewMassageText.bind(store)}
+                            dispatch={props.store.dispatch.bind(props.store)}
                         />
                     )}
                 />
