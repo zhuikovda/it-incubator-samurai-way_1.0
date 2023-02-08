@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import s from "./../Dialogs.module.css";
-import { MessageDataPropsType } from "../../../redux/state";
+import { MessageDataPropsType } from "../../../redux/store";
 
 type MessageItemPropsType = {
     messageData: MessageDataPropsType;
@@ -17,5 +17,3 @@ export const MessageItem: FC<MessageItemPropsType> = (props) => {
         </div>
     );
 };
-
-

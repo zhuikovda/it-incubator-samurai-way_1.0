@@ -1,11 +1,12 @@
 import React, { KeyboardEvent } from "react";
 import cl from "./MyPosts.module.css";
 import Post from "./Posts/Post";
-import { ActionTypes, ProfilePagePropsType } from "../../../redux/state";
+import { ActionTypesAC, ProfilePagePropsType } from "../../../redux/store";
+import { AddPostAC, UpdateNewPostTextAC } from "../../../redux/profilePageReducer";
 
 type MyPostsPropsType = {
     stateProfile: ProfilePagePropsType;
-    dispatch: (action: ActionTypes) => void;
+    dispatch: (action: ActionTypesAC) => void;
 };
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
@@ -16,13 +17,13 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
     const addPostHandler = () => {
-        props.dispatch({ type: "ADD-POST" });
+        props.dispatch(AddPostAC());
     };
 
     const onChangeTextareaHandler = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.dispatch({ type: "UPDATE-NEW-POST-TEXT", newText: text });
+            props.dispatch(UpdateNewPostTextAC(text));
             newPostElement.current.value = "";
         }
     };

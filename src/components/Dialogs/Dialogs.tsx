@@ -2,11 +2,12 @@ import React, { FC } from "react";
 import s from "./Dialogs.module.css";
 import { DialogItem } from "./Dialog/DialogItem";
 import { MessageItem } from "./Messages/MessageItem";
-import { ActionTypes, DialogsPagePropsType } from "../../redux/state";
+import { ActionTypesAC, DialogsPagePropsType } from "../../redux/store";
+import { AddMessageAC, UpdateNewMessageTextAC } from "../../redux/dialogsPageReducer";
 
 type DialogsPropsType = {
     stateDialogs: DialogsPagePropsType;
-    dispatch: (action: ActionTypes) => void;
+    dispatch: (action: ActionTypesAC) => void;
 };
 
 const Dialogs: FC<DialogsPropsType> = (props) => {
@@ -21,13 +22,13 @@ const Dialogs: FC<DialogsPropsType> = (props) => {
     const newMessageElement = React.createRef<HTMLTextAreaElement>();
 
     const addMessageHandler = () => {
-        props.dispatch({ type: "ADD-MESSAGE" });
+        props.dispatch(AddMessageAC());
     };
 
     const onChangeTextHandler = () => {
         if (newMessageElement.current) {
             let text = newMessageElement.current.value;
-            props.dispatch({ type: "UPDATE-NEW-MESSAGE-TEXT", newMessage: text });
+            props.dispatch(UpdateNewMessageTextAC(text));
         }
     };
 

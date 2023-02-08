@@ -1,3 +1,7 @@
+import profilePageReducer, { AddPostACType, UpdateNewPostTextACType } from "./profilePageReducer";
+import dialogsPageReducer, { AddMessageACType, UpdateNewMessageTextACType } from "./dialogsPageReducer";
+import sidebarFriendsReducer from "./sidebarFriendsReducer";
+
 export type StatePropsType = {
     dialogsPage: DialogsPagePropsType;
     profilePage: ProfilePagePropsType;
@@ -28,7 +32,7 @@ export type ProfilePagePropsType = {
     newPostText: string;
 };
 
-type PostDataPropsType = {
+export type PostDataPropsType = {
     id: number;
     message: string;
     likesCount: number;
@@ -50,32 +54,14 @@ export type StoreType = {
     _state: StatePropsType;
     subscribe: (observer: () => void) => void;
     getState: () => StatePropsType;
-    dispatch: (action: ActionTypes) => void;
+    dispatch: (action: ActionTypesAC) => void;
 };
 
-export type ActionTypes =
-    | AddPostActionType
-    | UpdateNewPostTextActionType
-    | AddMessageActionType
-    | UpdateNewMessageTextActionType;
-
-export type AddPostActionType = {
-    type: "ADD-POST";
-};
-
-export type UpdateNewPostTextActionType = {
-    type: "UPDATE-NEW-POST-TEXT";
-    newText: string;
-};
-
-export type AddMessageActionType = {
-    type: "ADD-MESSAGE";
-};
-
-export type UpdateNewMessageTextActionType = {
-    type: "UPDATE-NEW-MESSAGE-TEXT";
-    newMessage: string;
-};
+export type ActionTypesAC =
+    | AddPostACType
+    | UpdateNewPostTextACType
+    | AddMessageACType
+    | UpdateNewMessageTextACType;
 
 export const store: StoreType = {
     _renderEntireTree() {},
@@ -185,34 +171,20 @@ export const store: StoreType = {
         return this._state;
     },
     dispatch(action) {
-        if (action.type === "ADD-POST") {
-            const newPost: PostDataPropsType = {
-                id: 3,
-                message: this._state.profilePage.newPostText,
-                likesCount: 18
-            };
-            this._state.profilePage.postData.push(newPost);
-            this._state.profilePage.newPostText = "";
-            this._renderEntireTree();
-        } else if (action.type === "UPDATE-NEW-POST-TEXT") {
-            this._state.profilePage.newPostText = action.newText;
-            this._renderEntireTree();
-        } else if (action.type === "ADD-MESSAGE") {
-            const newMessage: MessageDataPropsType = {
-                id: 7,
-                message: this._state.dialogsPage.newMessageText,
-                leftEdge: true,
-                ava: ""
-            };
-            this._state.dialogsPage.messageData.push(newMessage);
-            this._state.dialogsPage.newMessageText = "";
-            this._renderEntireTree();
-        } else if (action.type === "UPDATE-NEW-MESSAGE-TEXT") {
-            this._state.dialogsPage.newMessageText = action.newMessage;
-            this._renderEntireTree();
-        }
+        
+        this._state.profilePage = profilePageReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsPageReducer(this._state.dialogsPage, action);
+        this._state.sidebarFriends = sidebarFriendsReducer(this._state.sidebarFriends, action);
+
+        this._renderEntireTree();
     },
     subscribe(observer) {
         this._renderEntireTree = observer;
     }
 };
+
+
+
+
+
+

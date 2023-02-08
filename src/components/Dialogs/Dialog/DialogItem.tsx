@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import s from "./../Dialogs.module.css";
-import { DialogDataPropsType } from "../../../redux/state";
+import { DialogDataPropsType } from "../../../redux/store";
 
 type DialogItemPropsType = {
     dialogData: DialogDataPropsType;
@@ -18,4 +18,3 @@ export const DialogItem: React.FC<DialogItemPropsType> = (props) => {
         </div>
     );
 };
-
