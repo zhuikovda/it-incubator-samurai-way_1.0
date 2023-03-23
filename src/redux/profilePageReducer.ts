@@ -1,9 +1,19 @@
-import { ActionTypesAC, PostDataPropsType, ProfilePagePropsType } from "./store";
+import { PostDataPropsType, ProfilePagePropsType } from "./redux-store";
 
 const ADD_POST = "ADD-POST";
 const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
 
-const profilePageReducer = (state: ProfilePagePropsType, action: ActionTypesAC) => {
+let initialState = {
+    postData: [
+        { id: 1, message: "Hi, Dima!", likesCount: 15 },
+        { id: 2, message: "Hi, Eva!", likesCount: 20 }
+    ],
+    newPostText: "Hi, Sveta!"
+};
+
+export type ActionTypesAC = AddPostACType | UpdateNewPostTextACType;
+
+const profilePageReducer = (state: ProfilePagePropsType = initialState, action: ActionTypesAC) => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostDataPropsType = {

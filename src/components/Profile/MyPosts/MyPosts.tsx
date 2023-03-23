@@ -1,29 +1,35 @@
-import React, { KeyboardEvent } from "react";
+import React, {KeyboardEvent} from "react";
 import cl from "./MyPosts.module.css";
 import Post from "./Posts/Post";
-import { ActionTypesAC, ProfilePagePropsType } from "../../../redux/store";
-import { AddPostAC, UpdateNewPostTextAC } from "../../../redux/profilePageReducer";
+import {ActionTypesAC, AddPostAC, UpdateNewPostTextAC} from "../../../redux/profilePageReducer";
+import {PostDataPropsType, ProfilePagePropsType} from "../../../redux/redux-store";
 
 type MyPostsPropsType = {
-    stateProfile: ProfilePagePropsType;
-    dispatch: (action: ActionTypesAC) => void;
+    // stateProfile: ProfilePagePropsType;
+    // dispatch: (action: ActionTypesAC) => void;
+    posts: PostDataPropsType[];
+    newPostText: string;
+    UpdateNewPostText: (text: string) => void;
+    AddPostHandler: () => void;
 };
 
 const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-    const postElement = props.stateProfile.postData.map((post) => (
+    const postElement = props.posts.map((post: PostDataPropsType) => (
         <Post message={post.message} likesCount={post.likesCount} />
     ));
 
+
     const newPostElement = React.createRef<HTMLTextAreaElement>();
 
-    const addPostHandler = () => {
-        props.dispatch(AddPostAC());
+    const onAddPostHandler = () => {
+        props.AddPostHandler();
+        // props.dispatch(AddPostAC());
     };
 
     const onChangeTextareaHandler = () => {
         if (newPostElement.current) {
             let text = newPostElement.current.value;
-            props.dispatch(UpdateNewPostTextAC(text));
+            props.UpdateNewPostText(text);
             newPostElement.current.value = "";
         }
     };
@@ -36,11 +42,11 @@ const MyPosts: React.FC<MyPostsPropsType> = (props) => {
                     <textarea
                         onChange={onChangeTextareaHandler}
                         ref={newPostElement}
-                        value={props.stateProfile.newPostText}
+                        value={props.newPostText}
                     />
                 </div>
                 <div>
-                    <button onClick={addPostHandler}>Add post</button>
+                    <button onClick={onAddPostHandler}>Add post</button>
                 </div>
             </div>
             <div className={cl.posts}>{postElement}</div>

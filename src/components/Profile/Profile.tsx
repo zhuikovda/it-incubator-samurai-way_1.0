@@ -2,7 +2,10 @@ import React from "react";
 // import cl from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { ActionTypesAC, ProfilePagePropsType } from "../../redux/store";
+import { ProfilePagePropsType } from "../../redux/redux-store";
+import { ActionTypesAC } from "../../redux/profilePageReducer";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
+
 
 type ProfilePropsType = {
     stateProfile: ProfilePagePropsType;
@@ -13,7 +16,7 @@ const Profile: React.FC<ProfilePropsType> = (props) => {
     return (
         <div>
             <ProfileInfo />
-            <MyPosts stateProfile={props.stateProfile} dispatch={props.dispatch} />
+            <MyPostsContainer  stateProfile={props.stateProfile} dispatch={props.dispatch} />
         </div>
     );
 };

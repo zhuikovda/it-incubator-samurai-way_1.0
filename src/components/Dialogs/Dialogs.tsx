@@ -1,34 +1,34 @@
-import React, { FC } from "react";
+import React, {FC} from "react";
 import s from "./Dialogs.module.css";
-import { DialogItem } from "./Dialog/DialogItem";
-import { MessageItem } from "./Messages/MessageItem";
-import { ActionTypesAC, DialogsPagePropsType } from "../../redux/store";
-import { AddMessageAC, UpdateNewMessageTextAC } from "../../redux/dialogsPageReducer";
+import {DialogItem} from "./Dialog/DialogItem";
+import {MessageItem} from "./Messages/MessageItem";
+import {DialogsPagePropsType} from "../../redux/redux-store";
 
 type DialogsPropsType = {
-    stateDialogs: DialogsPagePropsType;
-    dispatch: (action: ActionTypesAC) => void;
+    updateNewMessageText: (text: string) => void;
+    addMessage: () => void;
+    dialogsPage: DialogsPagePropsType
 };
 
 const Dialogs: FC<DialogsPropsType> = (props) => {
-    const dialogElement = props.stateDialogs.dialogData.map((dialog) => (
+    const dialogElement = props.dialogsPage.dialogData.map((dialog) => (
         <DialogItem dialogData={dialog} />
     ));
 
-    const messageElement = props.stateDialogs.messageData.map((message) => (
+    const messageElement = props.dialogsPage.messageData.map((message) => (
         <MessageItem messageData={message} />
     ));
 
     const newMessageElement = React.createRef<HTMLTextAreaElement>();
 
     const addMessageHandler = () => {
-        props.dispatch(AddMessageAC());
+        props.addMessage();
     };
 
     const onChangeTextHandler = () => {
         if (newMessageElement.current) {
             let text = newMessageElement.current.value;
-            props.dispatch(UpdateNewMessageTextAC(text));
+            props.updateNewMessageText(text);
         }
     };
 
@@ -42,7 +42,7 @@ const Dialogs: FC<DialogsPropsType> = (props) => {
                         <textarea
                             onChange={onChangeTextHandler}
                             ref={newMessageElement}
-                            value={props.stateDialogs.newMessageText}
+                            value={props.dialogsPage.newMessageText}
                         ></textarea>
                     </div>
                     <div>

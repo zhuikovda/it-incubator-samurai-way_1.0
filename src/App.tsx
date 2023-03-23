@@ -8,14 +8,17 @@ import { Route } from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
-import { StatePropsType, StoreType, store } from "./redux/store";
+import { StatePropsType, StoreType} from "./redux/redux-store";
+import { AnyAction, Dispatch, Middleware } from "redux";
+import store from "./redux/redux-store";
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AddPropsType = {
-    store: StoreType;
+    // store: any;
 };
 
 const App: React.FC<AddPropsType> = (props) => {
-    let state = props.store.getState();
+    let state = store.getState();
     return (
         <div className="app_wrapper">
             <Header />
@@ -26,16 +29,16 @@ const App: React.FC<AddPropsType> = (props) => {
                     render={() => (
                         <Profile
                             stateProfile={state.profilePage}
-                            dispatch={props.store.dispatch.bind(props.store)}
+                            dispatch={store.dispatch.bind(store)}
                         />
                     )}
                 />
                 <Route
                     path="/dialogs"
                     render={() => (
-                        <Dialogs
+                        <DialogsContainer
                             stateDialogs={state.dialogsPage}
-                            dispatch={props.store.dispatch.bind(props.store)}
+                            dispatch={store.dispatch.bind(store)}
                         />
                     )}
                 />

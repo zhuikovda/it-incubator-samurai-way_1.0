@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 import s from "./../Dialogs.module.css";
-import { MessageDataPropsType } from "../../../redux/store";
+import { MessageDataPropsType } from "../../../redux/redux-store";
+
 
 type MessageItemPropsType = {
     messageData: MessageDataPropsType;
