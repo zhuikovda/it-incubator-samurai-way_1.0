@@ -2,15 +2,17 @@ import React, {FC} from "react";
 import s from "./Dialogs.module.css";
 import {DialogItem} from "./Dialog/DialogItem";
 import {MessageItem} from "./Messages/MessageItem";
-import {DialogsPagePropsType} from "../../redux/redux-store";
+import {DialogsPagePropsType} from "../../redux/dialogsPageReducer";
+import {DialogsContainerPropsType} from "./DialogsContainer";
 
-type DialogsPropsType = {
-    updateNewMessageText: (text: string) => void;
-    addMessage: () => void;
-    dialogsPage: DialogsPagePropsType
-};
 
-const Dialogs: FC<DialogsPropsType> = (props) => {
+// type DialogsPropsType = {
+//     updateNewMessageText: (text: string) => void;
+//     addMessage: () => void;
+//     dialogsPage: DialogsPagePropsType
+// };
+
+const Dialogs: FC<DialogsContainerPropsType> = (props) => {
     const dialogElement = props.dialogsPage.dialogData.map((dialog) => (
         <DialogItem dialogData={dialog} />
     ));

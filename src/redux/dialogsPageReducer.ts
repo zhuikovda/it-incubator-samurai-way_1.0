@@ -1,4 +1,4 @@
-import { DialogsPagePropsType, MessageDataPropsType } from "./redux-store";
+
 
 const ADD_MESSAGE = "ADD-MESSAGE";
 const UPDATE_NEW_MESSAGE_TEXT = "UPDATE-NEW-MESSAGE-TEXT";
@@ -77,9 +77,28 @@ let initialState = {
     newMessageText: "Hi, dima!"
 };
 
-export type ActionTypesAC = AddMessageACType | UpdateNewMessageTextACType;
+export type DialogsPagePropsType = {
+    dialogData: DialogDataPropsType[];
+    messageData: MessageDataPropsType[];
+    newMessageText: string;
+};
 
-const dialogsPageReducer = (state: DialogsPagePropsType = initialState, action: ActionTypesAC) => {
+export type DialogDataPropsType = {
+    id: number;
+    name: string;
+    ava: string;
+};
+
+export type MessageDataPropsType = {
+    id: number;
+    message: string;
+    leftEdge: boolean;
+    ava: string;
+};
+
+export type ActionTypesDialogsAC = AddMessageACType | UpdateNewMessageTextACType;
+
+const dialogsPageReducer = (state: DialogsPagePropsType = initialState, action: ActionTypesDialogsAC): DialogsPagePropsType => {
     switch (action.type) {
         case ADD_MESSAGE:
             const newMessage: MessageDataPropsType = {

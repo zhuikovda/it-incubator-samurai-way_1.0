@@ -1,16 +1,19 @@
 import "./index.css";
-// import { store } from "./redux/redux-store";
-import React, { FC } from "react";
+import React, {FC} from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
+import {BrowserRouter} from "react-router-dom";
 import store from "./redux/redux-store";
+import {Provider} from "react-redux";
 
-export const renderEntireTree = () => {
+
+export let renderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App /* store ={store} *//>
+            <Provider store = {store}>
+                <App /* store ={store} */ />
+            </Provider>
         </BrowserRouter>,
         document.getElementById("root")
     );
@@ -18,4 +21,8 @@ export const renderEntireTree = () => {
 
 renderEntireTree();
 
-store.subscribe(renderEntireTree);
+store.subscribe(() => {
+    renderEntireTree();
+});
+
+

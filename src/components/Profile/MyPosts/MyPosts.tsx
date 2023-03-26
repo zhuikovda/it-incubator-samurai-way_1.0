@@ -1,19 +1,20 @@
 import React, {KeyboardEvent} from "react";
 import cl from "./MyPosts.module.css";
 import Post from "./Posts/Post";
-import {ActionTypesAC, AddPostAC, UpdateNewPostTextAC} from "../../../redux/profilePageReducer";
-import {PostDataPropsType, ProfilePagePropsType} from "../../../redux/redux-store";
+import {ActionTypesAC, AddPostAC, PostDataPropsType, UpdateNewPostTextAC} from "../../../redux/profilePageReducer";
+import {MyPostsContainerPropsType} from "./MyPostsContainer";
 
-type MyPostsPropsType = {
-    // stateProfile: ProfilePagePropsType;
-    // dispatch: (action: ActionTypesAC) => void;
-    posts: PostDataPropsType[];
-    newPostText: string;
-    UpdateNewPostText: (text: string) => void;
-    AddPostHandler: () => void;
-};
 
-const MyPosts: React.FC<MyPostsPropsType> = (props) => {
+// type MyPostsPropsType = {
+//     // stateProfile: ProfilePagePropsType;
+//     // dispatch: (action: ActionTypesAC) => void;
+//     posts: PostDataPropsType[];
+//     newPostText: string;
+//     UpdateNewPostText: (text: string) => void;
+//     AddPostHandler: () => void;
+// };
+
+const MyPosts: React.FC<MyPostsContainerPropsType> = (props) => {
     const postElement = props.posts.map((post: PostDataPropsType) => (
         <Post message={post.message} likesCount={post.likesCount} />
     ));

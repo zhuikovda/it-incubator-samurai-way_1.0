@@ -1,4 +1,15 @@
-import { SidebarFriendsPropsType } from "./redux-store";
+
+
+export type SidebarFriendsPropsType = {
+    title: string;
+    friends: FriendsPropsType[];
+};
+
+type FriendsPropsType = {
+    id: number;
+    name: string;
+    ava: string;
+};
 
 let initialState = {
     title: "Friends",
