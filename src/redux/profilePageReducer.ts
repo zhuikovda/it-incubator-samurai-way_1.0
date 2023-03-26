@@ -1,12 +1,12 @@
-const ADD_POST = "ADD-POST";
-const UPDATE_NEW_POST_TEXT = "UPDATE-NEW-POST-TEXT";
+const ADD_POST = 'ADD-POST';
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 let initialState = {
     postData: [
-        {id: 1, message: "Hi, Dima!", likesCount: 15},
-        {id: 2, message: "Hi, Eva!", likesCount: 20}
+        { id: 1, message: 'Hi, Dima!', likesCount: 15 },
+        { id: 2, message: 'Hi, Eva!', likesCount: 20 }
     ],
-    newPostText: "Hi, Sveta!"
+    newPostText: 'Hi, Sveta!'
 };
 
 export type ProfilePagePropsType = {
@@ -30,12 +30,15 @@ const profilePageReducer = (state: ProfilePagePropsType = initialState, action: 
                 message: state.newPostText,
                 likesCount: 18
             };
-            state.postData.push(newPost);
-            state.newPostText = "";
-            return state;
+            let stateCopy = { ...state };
+            stateCopy.postData = [...state.postData]
+            stateCopy.postData.push(newPost);
+            stateCopy.newPostText = '';
+            return stateCopy;
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            let stateCopyPost = {...state}            
+            stateCopyPost.newPostText = action.newText;
+            return stateCopyPost;
         default:
             return state;
     }

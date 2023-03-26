@@ -8,7 +8,7 @@ import store from "./redux/redux-store";
 import {Provider} from "react-redux";
 
 
-export let renderEntireTree = () => {
+// export let renderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
             <Provider store = {store}>
@@ -17,12 +17,12 @@ export let renderEntireTree = () => {
         </BrowserRouter>,
         document.getElementById("root")
     );
-};
+// };
 
-renderEntireTree();
+// renderEntireTree();
 
-store.subscribe(() => {
-    renderEntireTree();
-});
+// store.subscribe(() => {
+//     renderEntireTree();
+// });
 
 
