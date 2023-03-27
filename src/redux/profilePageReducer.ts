@@ -22,23 +22,25 @@ export type PostDataPropsType = {
 
 export type ActionTypesAC = AddPostACType | UpdateNewPostTextACType;
 
-const profilePageReducer = (state: ProfilePagePropsType = initialState, action: ActionTypesAC): ProfilePagePropsType => {
+const profilePageReducer = (
+    state: ProfilePagePropsType = initialState,
+    action: ActionTypesAC
+): ProfilePagePropsType => {
     switch (action.type) {
         case ADD_POST:
-            const newPost: PostDataPropsType = {
-                id: 3,
-                message: state.newPostText,
-                likesCount: 18
+            return {
+                ...state,
+                postData: [
+                    ...state.postData,
+                    { id: 3, message: state.newPostText, likesCount: 18 }
+                ],
+                newPostText: ''
             };
-            let stateCopy = { ...state };
-            stateCopy.postData = [...state.postData]
-            stateCopy.postData.push(newPost);
-            stateCopy.newPostText = '';
-            return stateCopy;
         case UPDATE_NEW_POST_TEXT:
-            let stateCopyPost = {...state}            
-            stateCopyPost.newPostText = action.newText;
-            return stateCopyPost;
+            return {
+                ...state,
+                newPostText: action.newText
+            };
         default:
             return state;
     }
