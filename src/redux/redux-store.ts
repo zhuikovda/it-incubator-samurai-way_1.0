@@ -2,12 +2,13 @@ import { combineReducers, createStore } from 'redux';
 import profilePageReducer from './profilePageReducer';
 import dialogsPageReducer from './dialogsPageReducer';
 import sidebarFriendsReducer from './sidebarFriendsReducer';
-import { type } from 'os';
+import usersReducer from './usersReducer ';
 
 export const rootReducer = combineReducers({
     profilePage: profilePageReducer,
     dialogsPage: dialogsPageReducer,
-    sidebarFriends: sidebarFriendsReducer
+    sidebarFriends: sidebarFriendsReducer,
+    usersPage: usersReducer
 });
 
 export type AppStateType = ReturnType<typeof rootReducer>;

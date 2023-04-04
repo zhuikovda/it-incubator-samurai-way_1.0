@@ -55,6 +55,11 @@ const Nav: React.FC<NavPropsType> = (props) => {
                             Settings
                         </NavLink>
                     </li>
+                    <li className={cl.item}>
+                        <NavLink to="/users" activeClassName={cl.active}>
+                            Users
+                        </NavLink>
+                    </li>
                 </ul>
                 <div className={cl.sidebar_title}>{props.stateSidebarFriends.title}</div>
                 <div className={cl.wrapper__sidebar_friends}>{sidebarFriendsElement}</div>
