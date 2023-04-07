@@ -5,17 +5,34 @@ import axios from 'axios';
 import userPhoto from '../../assets/istockphoto-1300845620-612x612.jpg';
 
 export class Users extends Component<UsersContainerPropsType> {
-    constructor(props: UsersContainerPropsType) {
-        super(props);
+    componentDidMount(): void {
         axios
-            .get('https://social-network.samuraijs.com/api/1.0/users')
+            .get(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSise}`
+            )
             .then((res) => {
                 this.props.setUsers(res.data.items);
+                this.props.setTotalUsersCount(res.data.totalCount);
             });
     }
 
-    render() {
+    onClickHandler = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber);
+        axios
+            .get(
+                `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSise}`
+            )
+            .then((res) => {
+                this.props.setUsers(res.data.items);
+            });
+    };
 
+    render() {
+        const pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSise);
+        const pages = [];
+        for (let i = 1; i <= pagesCount; i++) {
+            pages.push(i);
+        }
         return (
             <div>
                 {this.props.users.map((el) => (
@@ -24,8 +41,12 @@ export class Users extends Component<UsersContainerPropsType> {
                             <img src={el.photos.small ? el.photos.small : userPhoto} alt='' />
                             <div>
                                 {el.followed
-                                    ? (<button onClick={() => {this.props.unFollowUsers(el.id);}}>Unfollow </button>)
-                                    : (<button onClick={() => {this.props.followUsers(el.id);}}>Follow</button>)}
+                                    ? (<button onClick={() => {this.props.unFollowUsers(el.id);}}>
+                                        Unfollow{' '}
+                                    </button>)
+                                    : (<button onClick={() => {this.props.followUsers(el.id);}}>
+                                        Follow
+                                    </button>)}
                             </div>
                         </span>
                         <span>
@@ -40,8 +61,17 @@ export class Users extends Component<UsersContainerPropsType> {
                         </span>
                     </div>
                 ))}
+                <div className={s.pageWrapper}>
+                    {pages.map((el) => {
+                        return (
+                            <span className={this.props.currentPage === el ? s.selPage + ' ' + s.page : s.page}
+                                onClick={(e) => {this.onClickHandler(el);}}>
+                                {el}
+                            </span>
+                        );
+                    })}
+                </div>
             </div>
         );
     }
-
-};
+}

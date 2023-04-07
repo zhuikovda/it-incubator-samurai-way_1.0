@@ -10,3 +10,17 @@
     border: 5px;
     background-color: rgb(251, 255, 0);
 }
+
+.selPage {
+    font-weight: bold;
+}
+
+.page {
+    padding: 2px;
+}
+
+
+.pageWrapper {
+    margin-top: 10px;
+
+}
