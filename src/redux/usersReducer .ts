@@ -25,7 +25,7 @@ export type UsersType = {
     // location: LocationType;
 };
 
-type PhotosType = {
+export type PhotosType = {
     small: string;
     large: string;
 };
