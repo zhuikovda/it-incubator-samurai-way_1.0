@@ -81,48 +81,48 @@ const usersReducer = (state = initialState, action: any): InitialStateType => {
     }
 };
 
-type FollowACType = ReturnType<typeof followAC>;
-export const followAC = (userID: number) => {
+type FollowACType = ReturnType<typeof followUsers>;
+export const followUsers = (userID: number) => {
     return {
         type: FOLLOW,
         userID
     } as const;
 };
 
-export type UnfollowACType = ReturnType<typeof unfollowAC>;
-export const unfollowAC = (userID: number) => {
+export type UnfollowACType = ReturnType<typeof unfollowUsers>;
+export const unfollowUsers = (userID: number) => {
     return {
         type: UNFOLLOW,
         userID
     } as const;
 };
 
-export type SetUsersType = ReturnType<typeof setUsersAC>;
-export const setUsersAC = (users: UsersType[]) => {
+export type SetUsersType = ReturnType<typeof setUsers>;
+export const setUsers = (users: UsersType[]) => {
     return {
         type: SET_USERS,
         users
     } as const;
 };
 
-export type SetCurrentPagType = ReturnType<typeof setCurrentPageAC>;
-export const setCurrentPageAC = (currentPage: number) => {
+export type SetCurrentPagType = ReturnType<typeof setCurrentPage>;
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: SET_CURRENT_PAGE,
         currentPage
     } as const;
 };
 
-export type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCountAC>;
-export const setTotalUsersCountAC = (totalUsersCount: number) => {
+export type SetTotalUsersCountACType = ReturnType<typeof setTotalUsersCount>;
+export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
         type: SET_USER_TOTAL_COUNT,
         totalUsersCount
     } as const;
 };
 
-export type ToggleIsFetchingType = ReturnType<typeof toggleIsFetchingAC>;
-export const toggleIsFetchingAC = (isFetching: boolean) => {
+export type ToggleIsFetchingType = ReturnType<typeof toggleIsFetching>;
+export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: TOGGLE_IS_FETCING,
         isFetching

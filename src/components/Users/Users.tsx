@@ -7,7 +7,7 @@ type UsersPropsType = {
     totalUsersCount: number;
     pageSise: number;
     users: UsersType[];
-    unFollowUsers: (userID: number) => void;
+    unfollowUsers: (userID: number) => void;
     followUsers: (userID: number) => void;
     currentPage: number;
     onClickHandler: (pageNumber: number) => void;
@@ -28,7 +28,7 @@ export const Users: FC<UsersPropsType> = (props) => {
                         <img src={el.photos.small ? el.photos.small : userPhoto} alt='' />
                         <div>
                             {el.followed
-                                ? (<button onClick={() => {props.unFollowUsers(el.id);}}>
+                                ? (<button onClick={() => {props.unfollowUsers(el.id);}}>
                                     Unfollow{' '}
                                 </button>)
                                 : (<button onClick={() => {props.followUsers(el.id);}}>
