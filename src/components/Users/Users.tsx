@@ -2,6 +2,7 @@ import React, {Component, FC} from 'react';
 import s from './Users.module.css';
 import userPhoto from '../../assets/istockphoto-1300845620-612x612.jpg';
 import {UsersType} from '../../redux/usersReducer ';
+import {NavLink} from 'react-router-dom';
 
 type UsersPropsType = {
     totalUsersCount: number;
@@ -25,7 +26,9 @@ export const Users: FC<UsersPropsType> = (props) => {
             {props.users.map((el) => (
                 <div key={el.id}>
                     <span className={s.avaFollowContainer}>
-                        <img src={el.photos.small ? el.photos.small : userPhoto} alt='' />
+                        <NavLink to={'/profile/' + el.id}>
+                            <img src={el.photos.small ? el.photos.small : userPhoto} alt='' />
+                        </NavLink>
                         <div>
                             {el.followed
                                 ? (<button onClick={() => {props.unfollowUsers(el.id);}}>

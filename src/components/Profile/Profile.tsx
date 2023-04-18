@@ -1,24 +1,25 @@
-import React from "react";
+import React, {FC} from "react";
 // import cl from "./Profile.module.css"
 import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import { ActionTypesAC, ProfilePagePropsType } from "../../redux/profilePageReducer";
+import {ActionTypesAC, ProfilePagePropsType, ProfilePropsType} from "../../redux/profilePageReducer";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 
+type ProfileType = {
+    profile: ProfilePropsType;
+};
 
-// type ProfilePropsType = {
-//     stateProfile: ProfilePagePropsType;
-//     dispatch: (action: ActionTypesAC) => void;
-// };
 
-const Profile = () => {
+const Profile: FC<ProfileType> = (props) => {
+
     return (
         <div>
-            <ProfileInfo />
+            <ProfileInfo profile={props.profile} />
             <MyPostsContainer />
         </div>
     );
+
 };
 
 export default Profile;
