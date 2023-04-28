@@ -1,46 +1,36 @@
-import React, {Component} from 'react';
+import React, { Component, useEffect } from 'react';
 import Profile from './Profile';
-import {PostDataPropsType, ProfilePagePropsType, ProfilePropsType, setUsersProfile} from '../../redux/profilePageReducer';
-import axios, {Axios} from 'axios';
-import {AppStateType} from '../../redux/redux-store';
-import {type} from 'os';
-import {connect} from 'react-redux';
-import {log} from 'console';
+import { ProfilePropsType, setUsersProfile } from '../../redux/profilePageReducer';
+import axios from 'axios';
+import { AppStateType } from '../../redux/redux-store';
+import { connect } from 'react-redux';
+import { RouteComponentProps, withRouter } from 'react-router-dom';
 
-// type ProfilePropsType = {
-//     stateProfile: ProfilePagePropsType;
-// };
-
-class ProfileContainer1 extends Component<UsersContainerPropsType> {
-    //    const instance = axios.create({
-    //         baseURL: `https://social-network.samuraijs.com/api/1.0/`,
-    //         withCredentials: true,
-    //         headers: {
-    //             'API-KEY': '892376f3-d5e0-4a60-a67f-68045d32a32f'
-    //         }
-    //     });
+class ProfileContainer extends Component<PropsType> {
     componentDidMount(): void {
-
-        axios.get(
-            `https://social-network.samuraijs.com/api/1.0/profile/2`
-        )
+        let userId = this.props.match.params.userId;
+        if (!userId) {
+            userId = '2';
+        }
+        axios
+            .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
             .then((res) => {
                 this.props.setUsersProfile(res.data);
             });
     }
 
-    render() {        
+    render() {
         return (
             <div>
-                <Profile {...this.props} profile={this.props.profile}/>
+                <Profile {...this.props} profile={this.props.profile} />
             </div>
         );
     }
-};
+}
 
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType;
 
-type MapStateToPropsType  = {
+type MapStateToPropsType = {
     profile: ProfilePropsType;
 };
 
@@ -48,10 +38,66 @@ type MapDispatchToPropsType = {
     setUsersProfile: (profile: ProfilePropsType) => void;
 };
 
+type PathParansType = {
+    userId: string;
+};
+
+type PropsType = RouteComponentProps<PathParansType> & UsersContainerPropsType;
+
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
         profile: state.profilePage.profile
     };
 };
 
-export const ProfileContainer = connect(mapStateToProps, {setUsersProfile})(ProfileContainer1);
+const WithUrlDataaContainerComponent = withRouter(ProfileContainer);
+
+export default connect(mapStateToProps, { setUsersProfile })(
+    WithUrlDataaContainerComponent
+);
+
+//------------Functional component--------------
+// export type UsersContainerPropsType = MapStateToPropsType &
+//   MapDispatchToPropsType;
+// type MapStateToPropsType = {
+//   profile: ProfilePropsType;
+// };
+
+// type MapDispatchToPropsType = {
+//   setUsersProfile: (profile: ProfilePropsType) => void;
+// };
+
+// type PathParansType = {
+//   userId: string;
+// };
+
+// type PropsType = RouteComponentProps<PathParansType> & UsersContainerPropsType;
+
+// const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
+//   return {
+//     profile: state.profilePage.profile
+//   };
+// };
+
+// function ProfileContainer(props: PropsType) {
+//   useEffect(() => {
+//     const userId = props.match.params.userId;
+//     axios
+//       .get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
+//       .then((res) => {
+//         props.setUsersProfile(res.data);
+//       });
+//   }, []);
+
+//   return (
+//     <div>
+//       <Profile {...props} profile={props.profile} />
+//     </div>
+//   );
+// }
+
+// const WithUrlDataaContainerComponent = withRouter(ProfileContainer);
+
+// export default connect(mapStateToProps, { setUsersProfile })(
+//   WithUrlDataaContainerComponent
+// );

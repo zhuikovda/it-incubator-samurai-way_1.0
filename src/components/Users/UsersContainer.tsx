@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {AppStateType} from '../../redux/redux-store';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { AppStateType } from '../../redux/redux-store';
 import {
     followUsers,
     setCurrentPage,
@@ -11,17 +11,16 @@ import {
     UsersType
 } from '../../redux/usersReducer ';
 import axios from 'axios';
-import {Users} from './Users';
-import {Preloader} from '../common/Preloader';
-
-
+import { Users } from './Users';
+import { Preloader } from '../common/Preloader';
 
 export class UsersContainers extends Component<UsersContainerPropsType> {
     componentDidMount(): void {
         this.props.toggleIsFetching(true);
         axios
             .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSise}`
+                `https://social-network.samuraijs.com/api/1.0/users?page=
+                ${this.props.currentPage}&count=${this.props.pageSise}`
             )
             .then((res) => {
                 this.props.toggleIsFetching(false);
@@ -35,7 +34,8 @@ export class UsersContainers extends Component<UsersContainerPropsType> {
         this.props.toggleIsFetching(true);
         axios
             .get(
-                `https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSise}`
+                `https://social-network.samuraijs.com/api/1.0/users?page=
+                ${pageNumber}&count=${this.props.pageSise}`
             )
             .then((res) => {
                 this.props.toggleIsFetching(false);
@@ -44,21 +44,22 @@ export class UsersContainers extends Component<UsersContainerPropsType> {
     };
 
     render() {
-        return <>
-            {this.props.isFetching ? <Preloader /> : null}
-            <Users
-                totalUsersCount={this.props.totalUsersCount}
-                pageSise={this.props.pageSise}
-                users={this.props.users}
-                unfollowUsers={this.props.unfollowUsers}
-                followUsers={this.props.followUsers}
-                currentPage={this.props.currentPage}
-                onClickHandler={this.onClickHandler}
-            />
-        </>;
+        return (
+            <>
+                {this.props.isFetching ? <Preloader /> : null}
+                <Users
+                    totalUsersCount={this.props.totalUsersCount}
+                    pageSise={this.props.pageSise}
+                    users={this.props.users}
+                    unfollowUsers={this.props.unfollowUsers}
+                    followUsers={this.props.followUsers}
+                    currentPage={this.props.currentPage}
+                    onClickHandler={this.onClickHandler}
+                />
+            </>
+        );
     }
 }
-
 
 type MapStateToPropsType = {
     users: UsersType[];

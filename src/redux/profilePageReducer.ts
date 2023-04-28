@@ -4,8 +4,8 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 
 let initialState = {
     postData: [
-        {id: 1, message: 'Hi, Dima!', likesCount: 15},
-        {id: 2, message: 'Hi, Eva!', likesCount: 20}
+        { id: 1, message: 'Hi, Dima!', likesCount: 15 },
+        { id: 2, message: 'Hi, Eva!', likesCount: 20 }
     ],
     newPostText: 'Hi, Sveta!',
     profile: null
@@ -18,23 +18,23 @@ export type ProfilePagePropsType = {
 };
 
 export type ProfilePropsType = null | {
-    aboutMe: string,
+    aboutMe: string;
     contacts: {
-        facebook: string,
-        website: string,
-        vk: string,
-        twitter: string,
-        instagram: string,
-        youtube: string,
-        github: string,
+        facebook: string;
+        website: string;
+        vk: string;
+        twitter: string;
+        instagram: string;
+        youtube: string;
+        github: string;
         mainLink: string;
-    },
-    lookingForAJob: boolean,
-    lookingForAJobDescription: string,
-    fullName: string,
-    userId: number,
+    };
+    lookingForAJob: boolean;
+    lookingForAJobDescription: string;
+    fullName: string;
+    userId: number;
     photos: {
-        small: string,
+        small: string;
         large: string;
     };
 };
@@ -57,7 +57,7 @@ const profilePageReducer = (
                 ...state,
                 postData: [
                     ...state.postData,
-                    {id: 3, message: state.newPostText, likesCount: 18}
+                    { id: 3, message: state.newPostText, likesCount: 18 }
                 ],
                 newPostText: ''
             };
